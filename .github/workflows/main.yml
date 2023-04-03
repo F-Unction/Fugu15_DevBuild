@@ -1,0 +1,27 @@
+name: Build IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+         
+      - name: Install dependencies
+        uses: dhinakg/procursus-action@main
+        with:
+          packages: ldid fakeroot
+
+      - name: Build ipa
+        run: |
+          sudo security import Exploits/fastPath/arm.pfx -k /Library/Keychains/System.keychain -P password -A
+          make
+      
+      - name: Upload ipa
+        uses: actions/upload-artifact@latest
+        with:
+          name: Fugu15.tipa
+          path: Fugu15/Fugu15.tipa
