@@ -21,7 +21,7 @@ jobs:
           make
       
       - name: Upload ipa
-        uses: actions/upload-artifact@latest
+        uses: actions/upload-artifact@v3
         with:
           name: Fugu15.tipa
           path: Fugu15/Fugu15.tipa
